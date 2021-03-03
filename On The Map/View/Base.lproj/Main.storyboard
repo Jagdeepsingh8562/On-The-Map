@@ -23,7 +23,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gMc-ai-Vzx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-829" y="71"/>
+            <point key="canvasLocation" x="-2377" y="120"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -81,8 +81,8 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6JG-dC-1ty">
-                                <rect key="frame" x="80.999999999999986" y="540" width="250.66666666666663" height="51"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6JG-dC-1ty">
+                                <rect key="frame" x="94" y="551" width="224" height="51"/>
                                 <state key="normal" title="Button" image="google_logo"/>
                             </button>
                         </subviews>
@@ -92,8 +92,7 @@
                             <constraint firstItem="eYc-SY-oXu" firstAttribute="centerX" secondItem="dkl-Tm-s8w" secondAttribute="centerX" constant="-1" id="0Bb-28-v5J"/>
                             <constraint firstItem="dkl-Tm-s8w" firstAttribute="top" secondItem="brk-FH-o3s" secondAttribute="bottom" constant="8" id="38F-Kt-Qgb"/>
                             <constraint firstItem="eYc-SY-oXu" firstAttribute="centerX" secondItem="brk-FH-o3s" secondAttribute="centerX" id="5U7-8w-Evb"/>
-                            <constraint firstItem="6JG-dC-1ty" firstAttribute="centerX" secondItem="eYc-SY-oXu" secondAttribute="centerX" constant="-0.33333333333334281" id="7EU-16-exz"/>
-                            <constraint firstItem="6JG-dC-1ty" firstAttribute="top" secondItem="eYc-SY-oXu" secondAttribute="bottom" constant="18" id="Cb0-TW-TNi"/>
+                            <constraint firstItem="6JG-dC-1ty" firstAttribute="top" secondItem="eYc-SY-oXu" secondAttribute="bottom" constant="29" id="Cb0-TW-TNi"/>
                             <constraint firstItem="fwk-rr-sD7" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="288" id="FHI-hw-QN4"/>
                             <constraint firstItem="9Ii-0f-ztK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="87" id="Kg7-gg-EkA"/>
                             <constraint firstItem="brk-FH-o3s" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="337" id="PF5-Oq-ExF"/>
@@ -101,24 +100,25 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="9Ii-0f-ztK" secondAttribute="trailing" constant="87" id="asz-uM-VBU"/>
                             <constraint firstItem="eYc-SY-oXu" firstAttribute="centerX" secondItem="fwk-rr-sD7" secondAttribute="centerX" id="bgx-9o-ggk"/>
                             <constraint firstItem="eYc-SY-oXu" firstAttribute="trailing" secondItem="brk-FH-o3s" secondAttribute="trailing" id="d0w-bs-7mg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6JG-dC-1ty" secondAttribute="trailing" symbolic="YES" id="dMq-ff-eCt"/>
                             <constraint firstItem="9Ii-0f-ztK" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="dzP-bd-Jc5"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6JG-dC-1ty" secondAttribute="bottom" constant="145" id="hgk-10-8dh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6JG-dC-1ty" secondAttribute="bottom" constant="134" id="hgk-10-8dh"/>
                             <constraint firstItem="eYc-SY-oXu" firstAttribute="top" secondItem="dkl-Tm-s8w" secondAttribute="bottom" constant="15" id="l30-gm-bpc"/>
                             <constraint firstItem="AGB-y4-dOC" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="lvl-ue-ECA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="eYc-SY-oXu" secondAttribute="bottom" constant="214" id="sB2-Ba-cML"/>
                             <constraint firstItem="fwk-rr-sD7" firstAttribute="centerX" secondItem="AGB-y4-dOC" secondAttribute="centerX" constant="-0.33333333333328596" id="wR0-c9-vEA"/>
-                            <constraint firstItem="6JG-dC-1ty" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="81" id="ySm-tV-56A"/>
+                            <constraint firstItem="6JG-dC-1ty" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="94" id="ySm-tV-56A"/>
                             <constraint firstItem="AGB-y4-dOC" firstAttribute="top" secondItem="9Ii-0f-ztK" secondAttribute="bottom" constant="30" id="yYK-Tq-WwA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Ipk-lI-lFB"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="Ipk-lI-lFB"/>
                     <connections>
                         <segue destination="vSR-LZ-i92" kind="show" identifier="completeLogin" id="oJU-ce-hVD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-65" y="71"/>
+            <point key="canvasLocation" x="-12" y="105"/>
         </scene>
         <!--List-->
         <scene sceneID="q1U-aZ-TX3">
