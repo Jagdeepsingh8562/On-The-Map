@@ -17,12 +17,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
          //let locations: [Student] = UdacityAPI.Auth.student
         UdacityAPI.getStudentLocation(completion: handleStudentResponse(success:error:))
         
-       
-        
     }
     func handleStudentResponse(success: Bool, error: Error?) {
         if success {
-            locations.append(contentsOf: UdacityAPI.Auth.student)
+            locations.append(contentsOf: UdacityAPI.Auth.students)
             print("****sucess&&&")
             var annotations = [MKPointAnnotation]()
             
@@ -89,7 +87,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
-                app.canOpenURL(URL(string: toOpen)!)
+                app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
             }
         }
     }

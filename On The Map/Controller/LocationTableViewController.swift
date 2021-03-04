@@ -18,7 +18,7 @@ class LocationTableViewController: UITableViewController{
     }
     func handleStudentResponse(success: Bool, error: Error?) {
         if success {
-            student.append(contentsOf: UdacityAPI.Auth.student)
+            student.append(contentsOf: UdacityAPI.Auth.students)
             print("****sucess&&&")
             tableView.reloadData()
         }
@@ -33,7 +33,7 @@ class LocationTableViewController: UITableViewController{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.text = student[indexPath.row].firstName + student[indexPath.row].lastName
-        cell.imageView?.image = UIImage(systemName: "mappin.and.ellipse")
+        cell.imageView?.image = UIImage(named: "icon_pin")
         return cell
     }
     @IBAction func addLocation(_ sender: Any) {

@@ -11,8 +11,9 @@ import UIKit
 class UdacityAPI {
     struct Auth {
        static var user: String = ""
-        static var student = [Student]()
+        static var students = [Student]()
         static var objectId: String = ""
+        static var student: Student!
     }
     
     enum Endpoints {
@@ -25,6 +26,7 @@ class UdacityAPI {
         case getstudentLocation
         case postStudentLocation
         case putStudentLocation(String)
+        case webAuth
         
         var stringValue: String {
             switch self {
@@ -33,6 +35,7 @@ class UdacityAPI {
             case .getstudentLocation: return Endpoints.base + "StudentLocation?limit=10&order=-updatedAt"
             case .postStudentLocation: return Endpoints.base + "StudentLocation"
             case .putStudentLocation(let objectId): return Endpoints.base + "StudentLocation/\(objectId)"
+            case .webAuth: return "https://auth.udacity.com/sign-in?next=https://classroom.udacity.com/authenticated"
             }
         }
         var url: URL {
@@ -49,7 +52,7 @@ class UdacityAPI {
             do {
             let responseObject =  try JSONDecoder().decode(StudentResponse.self, from: data)
                 DispatchQueue.main.async {
-                Auth.student.append(contentsOf: responseObject.results)
+                Auth.students.append(contentsOf: responseObject.results)
                 completion(true,nil)
             }
             }catch {
@@ -59,17 +62,55 @@ class UdacityAPI {
         }
         task.resume()
     }
-    class func putStudentLocation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double,completion: @escaping (Bool, Error?) -> Void){
+    class func postStudentLocation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double,completion: @escaping (Bool, Error?) -> Void){
         var request = URLRequest(url: Endpoints.putStudentLocation(Auth.objectId).url)
         request.httpMethod = "PUT"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let body = PutLocationRequest(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)
+        let body = LocationRequest(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)
         do {
             request.httpBody = try JSONEncoder().encode(body)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
                 completion(false , error)
                 return
+            }
+            do {
+                let responseObject = try JSONDecoder().decode(PostLocationResponse.self, from: data)
+                Auth.student.createdAt = responseObject.createdAt
+                Auth.student.objectID = responseObject.objectID
+                completion(true,nil)
+
+            } catch {
+                print(error)
+                completion(false ,error)
+            }
+        }
+        task.resume()
+        } catch {
+            print(error)
+            completion(false ,error)
+        }
+    }
+    class func putStudentLocation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double,completion: @escaping (Bool, Error?) -> Void){
+        var request = URLRequest(url: Endpoints.putStudentLocation(Auth.objectId).url)
+        request.httpMethod = "PUT"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        let body = LocationRequest(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)
+        do {
+            request.httpBody = try JSONEncoder().encode(body)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data else {
+                completion(false , error)
+                return
+            }
+            do {
+                let responseObject = try JSONDecoder().decode(PutLocationResponse.self, from: data)
+                Auth.student.updatedAt = responseObject.updatedAt
+                completion(true,nil)
+
+            } catch {
+                print(error)
+                completion(false ,error)
             }
             
             completion(true,nil)

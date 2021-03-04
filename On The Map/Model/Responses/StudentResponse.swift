@@ -17,7 +17,7 @@ struct Student: Codable {
     let longitude, latitude: Double
     let mapString: String
     let mediaURL: String
-    let uniqueKey, objectID, createdAt, updatedAt: String
+    var uniqueKey, objectID, createdAt, updatedAt: String
 
     enum CodingKeys: String, CodingKey {
         case firstName, lastName, longitude, latitude, mapString, mediaURL, uniqueKey

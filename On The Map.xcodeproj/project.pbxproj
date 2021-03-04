@@ -16,7 +16,8 @@
 		B92E765D25EF8F06009959B5 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92E765C25EF8F06009959B5 /* AddLocationViewController.swift */; };
 		B92E766025EF8F34009959B5 /* VerifyLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92E765F25EF8F34009959B5 /* VerifyLocationViewController.swift */; };
 		B968145B25F13837002C2255 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B968145A25F13837002C2255 /* MapViewController.swift */; };
-		B968145F25F13FB9002C2255 /* PutLocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B968145E25F13FB9002C2255 /* PutLocationRequest.swift */; };
+		B968145F25F13FB9002C2255 /* LocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B968145E25F13FB9002C2255 /* LocationRequest.swift */; };
+		B968146425F14DDA002C2255 /* LocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B968146325F14DDA002C2255 /* LocationResponse.swift */; };
 		B9A43CCD25EFFA970086791C /* LoginTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A43CCC25EFFA970086791C /* LoginTextField.swift */; };
 		B9A43CD225EFFAF20086791C /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A43CD125EFFAF20086791C /* Colors.swift */; };
 		B9A43CD625EFFBAD0086791C /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9A43CD525EFFBAD0086791C /* Colors.xcassets */; };
@@ -38,7 +39,8 @@
 		B92E765C25EF8F06009959B5 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		B92E765F25EF8F34009959B5 /* VerifyLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyLocationViewController.swift; sourceTree = "<group>"; };
 		B968145A25F13837002C2255 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		B968145E25F13FB9002C2255 /* PutLocationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PutLocationRequest.swift; sourceTree = "<group>"; };
+		B968145E25F13FB9002C2255 /* LocationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRequest.swift; sourceTree = "<group>"; };
+		B968146325F14DDA002C2255 /* LocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationResponse.swift; sourceTree = "<group>"; };
 		B9A43CCC25EFFA970086791C /* LoginTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextField.swift; sourceTree = "<group>"; };
 		B9A43CD125EFFAF20086791C /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B9A43CD525EFFBAD0086791C /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -67,7 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				B9016B0425F098CE00FA7EA0 /* Credentails.swift */,
-				B968145E25F13FB9002C2255 /* PutLocationRequest.swift */,
+				B968145E25F13FB9002C2255 /* LocationRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -77,6 +79,7 @@
 			children = (
 				B9016B0B25F0AFFA00FA7EA0 /* SessionResponse.swift */,
 				B9016B0E25F0DC7B00FA7EA0 /* StudentResponse.swift */,
+				B968146325F14DDA002C2255 /* LocationResponse.swift */,
 			);
 			path = Responses;
 			sourceTree = "<group>";
@@ -232,9 +235,10 @@
 				B9016B0F25F0DC7B00FA7EA0 /* StudentResponse.swift in Sources */,
 				B9016B0C25F0AFFA00FA7EA0 /* SessionResponse.swift in Sources */,
 				B9A4F98425EE2962004B4CA0 /* LoginViewController.swift in Sources */,
-				B968145F25F13FB9002C2255 /* PutLocationRequest.swift in Sources */,
+				B968145F25F13FB9002C2255 /* LocationRequest.swift in Sources */,
 				B92E765D25EF8F06009959B5 /* AddLocationViewController.swift in Sources */,
 				B9016B0025F0939300FA7EA0 /* UdacityAPI.swift in Sources */,
+				B968146425F14DDA002C2255 /* LocationResponse.swift in Sources */,
 				B9A4F98025EE2962004B4CA0 /* AppDelegate.swift in Sources */,
 				B9A4F98225EE2962004B4CA0 /* SceneDelegate.swift in Sources */,
 				B9016B0525F098CE00FA7EA0 /* Credentails.swift in Sources */,
