@@ -56,6 +56,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         performSegue(withIdentifier: "addStudentLocation", sender: nil)
     }
     
+    @IBAction func logoutButton(_ sender: Any) {
+    }
     // MARK: - MKMapViewDelegate
 
     // Here we create a view with a "right callout accessory view". You might choose to look into other

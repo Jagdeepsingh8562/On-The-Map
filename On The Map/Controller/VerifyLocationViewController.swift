@@ -23,7 +23,9 @@ class VerifyLocationViewController: UIViewController ,MKMapViewDelegate {
         linkTextField.textColor = UIColor.white
         linkTextField.backgroundColor = UIColor.systemBlue
     }
+    
     @IBAction func submit(_ sender: Any) {
+        
     }
     @IBAction func cancel(_ sender: Any) {
     }

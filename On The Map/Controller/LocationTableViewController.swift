@@ -26,6 +26,16 @@ class LocationTableViewController: UITableViewController{
             print(error ?? "")
         }
     }
+    @IBAction func logoutButton(_ sender: Any) {
+        UdacityAPI.logoutRequest { (success, error) in
+            if success {
+                print("logout")
+                
+            }
+        }
+    }
+    
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return student.count
     }

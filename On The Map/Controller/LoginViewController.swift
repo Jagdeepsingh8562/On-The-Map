@@ -22,7 +22,7 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func loginAction(_ sender: Any) {
-        UdacityAPI.loginpostRequest(username:emailTextField.text ?? "", password: passwordTextField.text ?? "", completion: loginHandeResponse(success:error:))
+        UdacityAPI.loginRequest(username:emailTextField.text ?? "", password: passwordTextField.text ?? "", completion: loginHandeResponse(success:error:))
         
     }
     func loginHandeResponse(success: Bool, error: Error?) {
@@ -37,6 +37,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func loginViaGoogle(_ sender: Any) {
+       // let app
         performSegue(withIdentifier: "completeLogin", sender: nil)
     }
 }

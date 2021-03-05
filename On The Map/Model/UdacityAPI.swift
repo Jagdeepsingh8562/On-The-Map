@@ -122,7 +122,7 @@ class UdacityAPI {
         }
     }
    
-    class func loginpostRequest(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
+    class func loginRequest(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
         taskForPOSTRequest(url: Endpoints.session.url, responseType: SessionResponse.self, body: Credentails(udacity: Udacity(username: username, password: password))) { (response, error) in
             guard let response = response else {
                 completion(false,error)
