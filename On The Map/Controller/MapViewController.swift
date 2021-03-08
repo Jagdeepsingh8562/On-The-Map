@@ -53,10 +53,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @IBAction func addLocation(_ sender: Any) {
+      
         performSegue(withIdentifier: "addStudentLocation", sender: nil)
     }
     
     @IBAction func logoutButton(_ sender: Any) {
+        UdacityAPI.logoutRequest { (success, error) in
+            if success {
+                print("logout")
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    @IBAction func refresh(_ sender: Any) {
+        UdacityAPI.getStudentLocation(completion: handleStudentResponse(success:error:))
     }
     // MARK: - MKMapViewDelegate
 
@@ -87,24 +97,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     // to the URL specified in the annotationViews subtitle property.
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.shared
             if let toOpen = view.annotation?.subtitle! {
-                app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
+                UIApplication.shared.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
             }
         }
     }
-//    func mapView(mapView: MKMapView, annotationView: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-//
-//        if control == annotationView.rightCalloutAccessoryView {
-//            let app = UIApplication.sharedApplication()
-//            app.openURL(NSURL(string: annotationView.annotation.subtitle))
-//        }
-//    }
-
-    // MARK: - Sample Data
-    
-    // Some sample data. This is a dictionary that is more or less similar to the
-    // JSON data that you will download from Parse.
-    
-    
 }

@@ -148,12 +148,9 @@ class UdacityAPI {
           if error != nil { // Handle error…
               return
           }
-//            let range = 5..<data!.count
-//            let newData = data?.subdata(in: range)
-            /* subset response data! */
-            
+            DispatchQueue.main.async {
             completion(true, nil)
-          //print(String(data: newData!, encoding: .utf8)!)
+            }
         }
         task.resume()
 

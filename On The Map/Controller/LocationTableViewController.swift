@@ -30,9 +30,15 @@ class LocationTableViewController: UITableViewController{
         UdacityAPI.logoutRequest { (success, error) in
             if success {
                 print("logout")
+                self.navigationController?.popViewController(animated: true)
                 
             }
         }
+    }
+    
+    @IBAction func refreshTable(_ sender: Any) {
+        UdacityAPI.getStudentLocation(completion: handleStudentResponse(success:error:))
+        tableView.reloadData()
     }
     
     
@@ -45,6 +51,9 @@ class LocationTableViewController: UITableViewController{
         cell.textLabel?.text = student[indexPath.row].firstName + student[indexPath.row].lastName
         cell.imageView?.image = UIImage(named: "icon_pin")
         return cell
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        UIApplication.shared.open(URL(string: student[indexPath.row].mediaURL)!, options: [:], completionHandler: nil)
     }
     @IBAction func addLocation(_ sender: Any) {
         print("something")

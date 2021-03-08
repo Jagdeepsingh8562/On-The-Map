@@ -36,6 +36,11 @@ class LoginViewController: UIViewController {
         
     }
     
+    
+    @IBAction func signUp(_ sender: Any) {
+        UIApplication.shared.open(URL(string: "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com")!, options: [:], completionHandler: nil)
+    }
+    
     @IBAction func loginViaGoogle(_ sender: Any) {
        // let app
         performSegue(withIdentifier: "completeLogin", sender: nil)
