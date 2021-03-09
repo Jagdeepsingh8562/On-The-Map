@@ -13,6 +13,8 @@ class UdacityAPI {
        static var user: String = ""
         static var students = [Student]()
         static var objectId: String = ""
+        static var createdAt: String = ""
+        static var updatedAt: String = ""
         static var student: Student!
     }
     
@@ -63,22 +65,28 @@ class UdacityAPI {
         task.resume()
     }
     class func postStudentLocation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double,completion: @escaping (Bool, Error?) -> Void){
-        var request = URLRequest(url: Endpoints.putStudentLocation(Auth.objectId).url)
-        request.httpMethod = "PUT"
+        var request = URLRequest(url: Endpoints.postStudentLocation.url)
+        request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let body = LocationRequest(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)
         do {
             request.httpBody = try JSONEncoder().encode(body)
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data else {
-                completion(false , error)
+                DispatchQueue.main.async {
+                    completion(false , error)}
                 return
             }
             do {
                 let responseObject = try JSONDecoder().decode(PostLocationResponse.self, from: data)
-                Auth.student.createdAt = responseObject.createdAt
-                Auth.student.objectID = responseObject.objectID
+                DispatchQueue.main.async {
+               // Auth.student.createdAt = responseObject.createdAt
+                //Auth.student.objectID = responseObject.objectID
+                Auth.objectId = responseObject.objectID
+                Auth.createdAt = responseObject.createdAt
                 completion(true,nil)
+                    
+                }
 
             } catch {
                 print(error)
@@ -105,7 +113,7 @@ class UdacityAPI {
             }
             do {
                 let responseObject = try JSONDecoder().decode(PutLocationResponse.self, from: data)
-                Auth.student.updatedAt = responseObject.updatedAt
+                Auth.updatedAt = responseObject.updatedAt
                 completion(true,nil)
 
             } catch {

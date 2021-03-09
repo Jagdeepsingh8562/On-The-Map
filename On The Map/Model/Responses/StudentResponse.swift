@@ -13,10 +13,10 @@ struct StudentResponse: Codable {
 //GET method
 // MARK: - Result
 struct Student: Codable {
-    let firstName, lastName: String
-    let longitude, latitude: Double
-    let mapString: String
-    let mediaURL: String
+    var firstName, lastName: String
+    var longitude, latitude: Double
+    var mapString: String
+    var mediaURL: String
     var uniqueKey, objectID, createdAt, updatedAt: String
 
     enum CodingKeys: String, CodingKey {
