@@ -16,8 +16,8 @@ class AddLocationViewController: UIViewController , UITextFieldDelegate{
     let geocoder = CLGeocoder()
     var coordinates = CLLocationCoordinate2D()
     let uniqueKey = "2345"
-    let firstName = "Jsdfghjkl;"
-    let lastName = " B"
+    let firstName = "Selena"
+    let lastName = " Gomez"
     var locationString = ""
     var urlString = ""
     override func viewDidLoad() {
@@ -37,43 +37,39 @@ class AddLocationViewController: UIViewController , UITextFieldDelegate{
         if textField == addLocationTextField {
             locationString = textField.text ?? ""
         }
+        geocoder.geocodeAddressString(locationString) { (placemarks, error) in
+            guard let placemark = placemarks?.first else {
+                print(error?.localizedDescription ?? "")
+                return
+            }
+                self.coordinates = placemark.location!.coordinate
+        }
         print( urlString + " " + locationString)
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
         if let target = segue.destination as? VerifyLocationViewController {
+                
             target.locationRequest = LocationRequest(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: locationString, mediaURL: urlString, latitude: coordinates.latitude, longitude: coordinates.longitude)
             
         }
     }
     
     @IBAction func findButton(_ sender: Any) {
-        geocoder.geocodeAddressString(locationString) { (placemarks, error) in
-            guard let placemark = placemarks?.first else {
-                print(error ?? "")
-                return
-            }
-            DispatchQueue.main.async {
-                self.coordinates = placemark.location!.coordinate  }
-        }
+//        geocoder.geocodeAddressString(locationString) { (placemarks, error) in
+//            guard let placemark = placemarks?.first else {
+//                print(error?.localizedDescription ?? "")
+//                return
+//            }
+//                self.coordinates = placemark.location!.coordinate
+//        }
+            self.performSegue(withIdentifier: "verifySegue", sender: nil)
         
-        performSegue(withIdentifier: "verifySegue", sender: nil)
-        
-//        UdacityAPI.postStudentLocation(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: addLocationTextField.text ?? "", mediaURL: addLinkTextField.text ?? "", latitude: coordinates.latitude, longitude: coordinates.longitude, completion: handlePostLocation(success:error:))
+
      
     }
-//    func handlePostLocation(success: Bool, error: Error?) {
-//        if success {
-//            self.objectId = UdacityAPI.Auth.objectId
-//                self.createdAt = UdacityAPI.Auth.createdAt
-//                performSegue(withIdentifier: "verifySegue", sender: nil)
-//                print("post location success")}
-//    else {
-//            print(error ?? "")
-//        }
-//    }
+//
     
     @IBAction func cancel(_ sender: Any) {
     }

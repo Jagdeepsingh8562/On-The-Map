@@ -34,7 +34,7 @@ class UdacityAPI {
             switch self {
             case .session: return Endpoints.base + "session"
             case .getUser(let user): return Endpoints.base + "users/\(user)"
-            case .getstudentLocation: return Endpoints.base + "StudentLocation?limit=10&order=-updatedAt"
+            case .getstudentLocation: return Endpoints.base + "StudentLocation?limit=100&order=-updatedAt"
             case .postStudentLocation: return Endpoints.base + "StudentLocation"
             case .putStudentLocation(let objectId): return Endpoints.base + "StudentLocation/\(objectId)"
             case .webAuth: return "https://auth.udacity.com/sign-in?next=https://classroom.udacity.com/authenticated"
@@ -64,41 +64,20 @@ class UdacityAPI {
         }
         task.resume()
     }
-    class func postStudentLocation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double,completion: @escaping (Bool, Error?) -> Void){
-        var request = URLRequest(url: Endpoints.postStudentLocation.url)
-        request.httpMethod = "POST"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let body = LocationRequest(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)
-        do {
-            request.httpBody = try JSONEncoder().encode(body)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else {
-                DispatchQueue.main.async {
-                    completion(false , error)}
+    class func postStudentLocationRe(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double,completion: @escaping (Bool, Error?) -> Void)
+    {
+        taskForPOSTRequest(url: Endpoints.postStudentLocation.url, responseType: PostLocationResponse.self, body: LocationRequest(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)) { (responseObject, error) in
+            
+            guard let responseObject = responseObject else {
+                    completion(false , error)
                 return
             }
-            do {
-                let responseObject = try JSONDecoder().decode(PostLocationResponse.self, from: data)
-                DispatchQueue.main.async {
-               // Auth.student.createdAt = responseObject.createdAt
-                //Auth.student.objectID = responseObject.objectID
                 Auth.objectId = responseObject.objectID
                 Auth.createdAt = responseObject.createdAt
                 completion(true,nil)
-                    
-                }
-
-            } catch {
-                print(error)
-                completion(false ,error)
             }
         }
-        task.resume()
-        } catch {
-            print(error)
-            completion(false ,error)
-        }
-    }
+    
     class func putStudentLocation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double,completion: @escaping (Bool, Error?) -> Void){
         var request = URLRequest(url: Endpoints.putStudentLocation(Auth.objectId).url)
         request.httpMethod = "PUT"
@@ -191,7 +170,8 @@ class UdacityAPI {
                         completion(respon,nil)
                     }
                 } catch {
-                    completion(nil, error)
+                    DispatchQueue.main.async {
+                        completion(nil, error) }
                 }
             }
             postTask.resume()
@@ -201,42 +181,3 @@ class UdacityAPI {
         }
     }
 }
-
-/*
- class func loginRequest(username: String, password: String, completion: @escaping (Bool, Error?) -> Void) {
-     var request = URLRequest(url: Endpoints.session.url)
-     request.httpMethod = "POST"
-     request.addValue("application/json", forHTTPHeaderField: "Accept")
-     request.addValue("application/json", forHTTPHeaderField:"Content-Type")
-     let body = Credentails(udacity: Udacity(username: username, password: password))
-     // encoding a JSON body from a string, can also use a Codable struct
-     do {
-         request.httpBody = try JSONEncoder().encode(body)
-     let session = URLSession.shared
-     let task = session.dataTask(with: request) { data, response, error in
-         guard let data = data else {
-             completion(false,error)
-             return
-         }
-         do {
-             let range = 5..<data.count
-          let newData = data.subdata(in: range)
-             let stu = try JSONDecoder().decode(SessionResponse.self, from: newData)
-             Auth.user = stu.account.key
-             //print(stu)
-             completion(true,nil)
-         }
-         catch {
-                 print(error)
-             completion(false,error)
-             }
-        
-     }
-     task.resume()
-     } catch {
-         print(error)
-         completion(false,error)
-     }
- }
- 
- */

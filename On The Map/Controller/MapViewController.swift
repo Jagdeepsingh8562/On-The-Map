@@ -12,17 +12,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
     var locations = [Student]()
+    var annotations = [MKPointAnnotation]()
     override func viewDidLoad() {
         super.viewDidLoad()
          //let locations: [Student] = UdacityAPI.Auth.student
         UdacityAPI.getStudentLocation(completion: handleStudentResponse(success:error:))
-        
     }
+    
     func handleStudentResponse(success: Bool, error: Error?) {
         if success {
             locations.append(contentsOf: UdacityAPI.Auth.students)
-            print("****sucess&&&")
-            var annotations = [MKPointAnnotation]()
+           // var annotations = [MKPointAnnotation]()
             
             for dictionary in locations {
                 
@@ -42,6 +42,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                 
                 // Finally we place the annotation in an array of annotations.
                 annotations.append(annotation)
+
             }
             
             // When the array is complete, we add the annotations to the map.
@@ -61,18 +62,20 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         UdacityAPI.logoutRequest { (success, error) in
             if success {
                 print("logout")
-                self.navigationController?.popViewController(animated: true)
+                self.navigationController?.popToRootViewController(animated: true)
             }
         }
     }
     @IBAction func refresh(_ sender: Any) {
+        mapView.removeAnnotations(annotations)
         UdacityAPI.getStudentLocation(completion: handleStudentResponse(success:error:))
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        self.hidesBottomBarWhenPushed = true
     }
     // MARK: - MKMapViewDelegate
-
-    // Here we create a view with a "right callout accessory view". You might choose to look into other
-    // decoration alternatives. Notice the similarity between this method and the cellForRowAtIndexPath
-    // method in TableViewDataSource.
+    
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         let reuseId = "pin"
@@ -91,10 +94,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         return pinView
     }
-
     
-    // This delegate method is implemented to respond to taps. It opens the system browser
-    // to the URL specified in the annotationViews subtitle property.
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             if let toOpen = view.annotation?.subtitle! {

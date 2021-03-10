@@ -16,11 +16,17 @@ class LocationTableViewController: UITableViewController{
         navigationController?.setNavigationBarHidden(false, animated: true)
         UdacityAPI.getStudentLocation(completion: handleStudentResponse(success:error:))
     }
+    
+    func apicall() {
+        UdacityAPI.getStudentLocation(completion: handleStudentResponse(success:error:))
+    }
     func handleStudentResponse(success: Bool, error: Error?) {
         if success {
+            student.removeAll()
             student.append(contentsOf: UdacityAPI.Auth.students)
-            print("****sucess&&&")
             tableView.reloadData()
+            print("****sucess&&&")
+            
         }
         else {
             print(error ?? "")
@@ -37,8 +43,7 @@ class LocationTableViewController: UITableViewController{
     }
     
     @IBAction func refreshTable(_ sender: Any) {
-        UdacityAPI.getStudentLocation(completion: handleStudentResponse(success:error:))
-        tableView.reloadData()
+        apicall()
     }
     
     
@@ -47,7 +52,7 @@ class LocationTableViewController: UITableViewController{
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath)
         cell.textLabel?.text = student[indexPath.row].firstName + student[indexPath.row].lastName
         cell.imageView?.image = UIImage(named: "icon_pin")
         return cell
