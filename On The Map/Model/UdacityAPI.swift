@@ -21,8 +21,6 @@ class UdacityAPI {
     enum Endpoints {
         static let base = "https://onthemap-api.udacity.com/v1/"
         
-        
-        
         case session
         case getUser(String)
         case getstudentLocation

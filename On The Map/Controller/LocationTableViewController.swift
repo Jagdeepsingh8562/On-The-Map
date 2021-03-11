@@ -25,19 +25,28 @@ class LocationTableViewController: UITableViewController{
             student.removeAll()
             student.append(contentsOf: UdacityAPI.Auth.students)
             tableView.reloadData()
-            print("****sucess&&&")
             
-        }
-        else {
-            print(error ?? "")
+        }else {
+            guard let error = error else {
+                self.showAlert(message: "Something Wrong please try again", title: "Error")
+                return
+            }
+            self.showAlert(message: error.localizedDescription, title: "Error")
         }
     }
     @IBAction func logoutButton(_ sender: Any) {
         UdacityAPI.logoutRequest { (success, error) in
             if success {
                 print("logout")
+                self.dismiss(animated: true, completion: nil)
                 self.navigationController?.popViewController(animated: true)
                 
+            } else {
+                guard let error = error else {
+                    self.showAlert(message: "Something Wrong please try again", title: "Error")
+                    return
+                }
+                self.showAlert(message: error.localizedDescription, title: "Error")
             }
         }
     }
@@ -58,10 +67,10 @@ class LocationTableViewController: UITableViewController{
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        UIApplication.shared.open(URL(string: student[indexPath.row].mediaURL)!, options: [:], completionHandler: nil)
+        openLink(student[indexPath.row].mediaURL)
+       // UIApplication.shared.open(URL(string: student[indexPath.row].mediaURL)!, options: [:], completionHandler: nil)
     }
     @IBAction func addLocation(_ sender: Any) {
-        print("something")
         performSegue(withIdentifier: "addStudentLocation", sender: nil)
        
     }

@@ -10,20 +10,21 @@ import MapKit
 
 class MapViewController: UIViewController, MKMapViewDelegate {
     
+    @IBOutlet weak var activityView: UIActivityIndicatorView!
     @IBOutlet weak var mapView: MKMapView!
     var locations = [Student]()
     var annotations = [MKPointAnnotation]()
     override func viewDidLoad() {
         super.viewDidLoad()
          //let locations: [Student] = UdacityAPI.Auth.student
+        activityView.hidesWhenStopped = true
         UdacityAPI.getStudentLocation(completion: handleStudentResponse(success:error:))
     }
     
     func handleStudentResponse(success: Bool, error: Error?) {
         if success {
             locations.append(contentsOf: UdacityAPI.Auth.students)
-           // var annotations = [MKPointAnnotation]()
-            
+            print("map loaded")
             for dictionary in locations {
                 
                 let lat = CLLocationDegrees(dictionary.latitude)
@@ -46,10 +47,18 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             }
             
             // When the array is complete, we add the annotations to the map.
-            self.mapView.addAnnotations(annotations)
+            
+            DispatchQueue.main.async {
+                self.mapView.addAnnotations(self.annotations)
+                self.activityView.stopAnimating()
+            } 
         }
         else {
-            print(error ?? "")
+            guard let error = error else {
+                self.showAlert(message: "Something Wrong please try again", title: "Error")
+                return
+            }
+            self.showAlert(message: error.localizedDescription, title: "Error")
         }
     }
     
@@ -62,18 +71,25 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         UdacityAPI.logoutRequest { (success, error) in
             if success {
                 print("logout")
-                self.navigationController?.popToRootViewController(animated: true)
+               // self.navigationController?.popViewController(animated: true)
+                self.dismiss(animated: true, completion: nil)
+            } else {
+                guard let error = error else {
+                    self.showAlert(message: "Something Wrong please try again", title: "Error")
+                    return
+                }
+                self.showAlert(message: error.localizedDescription, title: "Error")
             }
         }
     }
     @IBAction func refresh(_ sender: Any) {
+        self.activityView.startAnimating()
         mapView.removeAnnotations(annotations)
+        self.annotations.removeAll()
         UdacityAPI.getStudentLocation(completion: handleStudentResponse(success:error:))
         
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        self.hidesBottomBarWhenPushed = true
-    }
+    
     // MARK: - MKMapViewDelegate
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -98,7 +114,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             if let toOpen = view.annotation?.subtitle! {
-                UIApplication.shared.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
+                openLink(toOpen)
             }
         }
     }

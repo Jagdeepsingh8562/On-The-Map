@@ -15,6 +15,7 @@
 		B92E765A25EF8C3E009959B5 /* LocationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92E765925EF8C3E009959B5 /* LocationTableViewController.swift */; };
 		B92E765D25EF8F06009959B5 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92E765C25EF8F06009959B5 /* AddLocationViewController.swift */; };
 		B92E766025EF8F34009959B5 /* VerifyLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B92E765F25EF8F34009959B5 /* VerifyLocationViewController.swift */; };
+		B946481525FA09D50067F1DF /* extentionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B946481425FA09D50067F1DF /* extentionViewController.swift */; };
 		B968145B25F13837002C2255 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B968145A25F13837002C2255 /* MapViewController.swift */; };
 		B968145F25F13FB9002C2255 /* LocationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B968145E25F13FB9002C2255 /* LocationRequest.swift */; };
 		B968146425F14DDA002C2255 /* LocationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B968146325F14DDA002C2255 /* LocationResponse.swift */; };
@@ -38,6 +39,7 @@
 		B92E765925EF8C3E009959B5 /* LocationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTableViewController.swift; sourceTree = "<group>"; };
 		B92E765C25EF8F06009959B5 /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		B92E765F25EF8F34009959B5 /* VerifyLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyLocationViewController.swift; sourceTree = "<group>"; };
+		B946481425FA09D50067F1DF /* extentionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extentionViewController.swift; sourceTree = "<group>"; };
 		B968145A25F13837002C2255 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		B968145E25F13FB9002C2255 /* LocationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationRequest.swift; sourceTree = "<group>"; };
 		B968146325F14DDA002C2255 /* LocationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationResponse.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				B92E765C25EF8F06009959B5 /* AddLocationViewController.swift */,
 				B92E765F25EF8F34009959B5 /* VerifyLocationViewController.swift */,
 				B968145A25F13837002C2255 /* MapViewController.swift */,
+				B946481425FA09D50067F1DF /* extentionViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -245,6 +248,7 @@
 				B92E765A25EF8C3E009959B5 /* LocationTableViewController.swift in Sources */,
 				B968145B25F13837002C2255 /* MapViewController.swift in Sources */,
 				B92E766025EF8F34009959B5 /* VerifyLocationViewController.swift in Sources */,
+				B946481525FA09D50067F1DF /* extentionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

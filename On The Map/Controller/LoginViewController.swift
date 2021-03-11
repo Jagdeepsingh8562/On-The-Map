@@ -9,41 +9,66 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
-    @IBOutlet weak var navBar: UINavigationItem!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var activityView: UIActivityIndicatorView!
     @IBOutlet weak var loginButton: UIButton!
-    @IBOutlet weak var loginViaGoogleButton: UIButton!
+    @IBOutlet weak var signUpButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        navigationController?.setNavigationBarHidden(true, animated: true)
-        
+        //navigationController?.setNavigationBarHidden(true, animated: true)
+        setLoggingIn(false)
     }
 
     @IBAction func loginAction(_ sender: Any) {
+        setLoggingIn(true)
         UdacityAPI.loginRequest(username:emailTextField.text ?? "", password: passwordTextField.text ?? "", completion: loginHandeResponse(success:error:))
         
     }
     func loginHandeResponse(success: Bool, error: Error?) {
+        setLoggingIn(false)
         if success {
-            DispatchQueue.main.async {
+            DispatchQueue.main.async{
                 self.performSegue(withIdentifier: "completeLogin", sender: nil)
             } }
-            else {
-                print(error ?? "")
+        else {
+            guard let error = error else {
+                self.showAlert(message: "Something Wrong please try again", title: "Error")
+                return
             }
+            self.showAlert(message: error.localizedDescription, title: "Login Error")
+        }
         
+    }
+    
+    func setLoggingIn(_ loggingIn: Bool) {
+        if loggingIn {
+            DispatchQueue.main.async {
+                self.activityView.startAnimating()
+                
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.activityView.stopAnimating()
+                
+            }
+        }
+        DispatchQueue.main.async {
+            self.emailTextField.isEnabled = !loggingIn
+            self.passwordTextField.isEnabled = !loggingIn
+            self.loginButton.isEnabled = !loggingIn
+            self.signUpButton.isEnabled = !loggingIn
+        }
     }
     
     
     @IBAction func signUp(_ sender: Any) {
-        UIApplication.shared.open(URL(string: "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com")!, options: [:], completionHandler: nil)
+        setLoggingIn(true)
+        openLink("https://auth.udacity.com/sign-up?next=https://classroom.udacity.com")
+        //UIApplication.shared.open(URL(string: "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com")!, options: [:], completionHandler: nil)
     }
     
-    @IBAction func loginViaGoogle(_ sender: Any) {
-       // let app
-        performSegue(withIdentifier: "completeLogin", sender: nil)
-    }
+    
 }
 

@@ -10,6 +10,9 @@ import MapKit
 import CoreLocation
 
 class VerifyLocationViewController: UIViewController ,MKMapViewDelegate {
+    
+    @IBOutlet weak var finishButton: UIButton!
+    @IBOutlet weak var activityView: UIActivityIndicatorView!
     var coordinates = CLLocationCoordinate2D()
     var searchLocation: String = "Jaipur"
     var addedLink: String = "https://www.google.com"
@@ -44,6 +47,7 @@ class VerifyLocationViewController: UIViewController ,MKMapViewDelegate {
             ano.coordinate = coordinates
             ano.subtitle = self.addedLink
             self.mapView.addAnnotation(ano)
+            self.mapView.showAnnotations([ano], animated: true)
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -71,7 +75,6 @@ class VerifyLocationViewController: UIViewController ,MKMapViewDelegate {
     }
    
     @IBAction func submit(_ sender: Any) {
-       /// UdacityAPI.postStudentLocation(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: addLocationTextField.text ?? "", mediaURL: addLinkTextField.text ?? "", latitude: coordinates.latitude, longitude: coordinates.longitude, completion: handlePostLocation(success:error:))
         guard let locationRequest = locationRequest else { return }
 
         UdacityAPI.postStudentLocationRe(uniqueKey: locationRequest.uniqueKey, firstName: locationRequest.firstName, lastName: locationRequest.lastName, mapString: searchLocation, mediaURL: addedLink, latitude: coordinates.latitude, longitude: coordinates.longitude, completion: handlePostLocation(success:error:))
@@ -87,23 +90,30 @@ class VerifyLocationViewController: UIViewController ,MKMapViewDelegate {
             
            UdacityAPI.Auth.students.append(student)
                 print("post location success" + "\(student)")
-            navigationController?.popViewController(animated: true)
-            self.hidesBottomBarWhenPushed = false
-        }
-    else {
-            print(error ?? "")
+            self.dismiss(animated: true, completion: nil)
+        }else {
+            guard let error = error else {
+                self.showAlert(message: "Something Wrong please try again", title: "Error")
+                return
+            }
+            self.showAlert(message: error.localizedDescription, title: "Error")
         }
     }
     
     func handlePutLocationResponse(success: Bool, error: Error?) {
         if success {
-//            UdacityAPI.Auth.students.append(student)
+            
             print("put location success")
         }else {
-            print(error ?? "") }
+            guard let error = error else {
+                self.showAlert(message: "Something Wrong please try again", title: "Error")
+                return
+            }
+            self.showAlert(message: error.localizedDescription, title: "Error")
+        }
     }
     
-    
     @IBAction func cancel(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 }
