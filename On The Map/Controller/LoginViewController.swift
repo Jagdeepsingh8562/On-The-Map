@@ -17,9 +17,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        //navigationController?.setNavigationBarHidden(true, animated: true)
         setLoggingIn(false)
     }
+    
 
     @IBAction func loginAction(_ sender: Any) {
         setLoggingIn(true)
@@ -30,6 +30,8 @@ class LoginViewController: UIViewController {
         setLoggingIn(false)
         if success {
             DispatchQueue.main.async{
+                self.passwordTextField.text = ""
+                self.emailTextField.text = ""
                 self.performSegue(withIdentifier: "completeLogin", sender: nil)
             } }
         else {
@@ -37,7 +39,8 @@ class LoginViewController: UIViewController {
                 self.showAlert(message: "Something Wrong please try again", title: "Error")
                 return
             }
-            self.showAlert(message: error.localizedDescription, title: "Login Error")
+            print(error)
+            self.showAlert(message: "Please enter vaild email and password", title: "Login Error")
         }
         
     }
@@ -66,7 +69,7 @@ class LoginViewController: UIViewController {
     @IBAction func signUp(_ sender: Any) {
         setLoggingIn(true)
         openLink("https://auth.udacity.com/sign-up?next=https://classroom.udacity.com")
-        //UIApplication.shared.open(URL(string: "https://auth.udacity.com/sign-up?next=https://classroom.udacity.com")!, options: [:], completionHandler: nil)
+        
     }
     
     

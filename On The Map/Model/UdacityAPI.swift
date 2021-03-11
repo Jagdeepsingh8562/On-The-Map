@@ -10,9 +10,11 @@ import UIKit
 
 class UdacityAPI {
     struct Auth {
-       static var user: String = ""
+       static var key: String = ""
         static var students = [Student]()
         static var objectId: String = ""
+        static var firstName = ""
+        static var lastName = ""
         static var createdAt: String = ""
         static var updatedAt: String = ""
         static var student: Student!
@@ -75,35 +77,17 @@ class UdacityAPI {
                 completion(true,nil)
             }
         }
+   
+    
     
     class func putStudentLocation(uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double,completion: @escaping (Bool, Error?) -> Void){
-        var request = URLRequest(url: Endpoints.putStudentLocation(Auth.objectId).url)
-        request.httpMethod = "PUT"
-        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        let body = LocationRequest(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)
-        do {
-            request.httpBody = try JSONEncoder().encode(body)
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data else {
+        taskForPOSTRequest(url: Endpoints.putStudentLocation(Auth.objectId).url, responseType: PutLocationResponse.self, body: LocationRequest(uniqueKey: uniqueKey, firstName: firstName, lastName: lastName, mapString: mapString, mediaURL: mediaURL, latitude: latitude, longitude: longitude)) { (responseObject, error) in
+            guard let responseObject = responseObject else {
                 completion(false , error)
                 return
             }
-            do {
-                let responseObject = try JSONDecoder().decode(PutLocationResponse.self, from: data)
-                Auth.updatedAt = responseObject.updatedAt
-                completion(true,nil)
-
-            } catch {
-                print(error)
-                completion(false ,error)
-            }
-            
+            Auth.updatedAt = responseObject.updatedAt
             completion(true,nil)
-        }
-        task.resume()
-        } catch {
-            print(error)
-            completion(false ,error)
         }
     }
    
@@ -113,9 +97,34 @@ class UdacityAPI {
                 completion(false,error)
                 return
             }
-            Auth.user = response.account.key
+            Auth.key = response.account.key
+            getLoggedInUser { (success, error) in
+                if success {
+                    print("User info fecthed successfully")
+                }
+            }
             completion(true,nil)
         }
+    }
+    class func getLoggedInUser(completion: @escaping (Bool, Error?) -> Void) {
+        let request = URLRequest(url: Endpoints.getUser(Auth.key).url)
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+          guard let data = data else {
+            completion(false,error)
+              return
+          }
+          let range = 5..<data.count
+          let newData = data.subdata(in: range)
+            let decoder = JSONDecoder()
+            do {
+                let responseObject = try decoder.decode(UserResponse.self, from: newData)
+                Auth.firstName = responseObject.firstName
+                Auth.lastName = responseObject.lastName
+            } catch {
+                print("error failed to fecthed User info")
+            }
+        }
+        task.resume()
     }
     class func logoutRequest(completion: @escaping (Bool ,Error? ) -> Void) {
         var request = URLRequest(url: Endpoints.session.url)
@@ -144,8 +153,11 @@ class UdacityAPI {
     
     class func taskForPOSTRequest<RequestType: Encodable, ResponseType: Decodable>(url: URL, responseType: ResponseType.Type, body: RequestType, completion: @escaping (ResponseType?, Error?) -> Void){
         var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        //request.addValue("application/json", forHTTPHeaderField: "Accept")
+        if responseType.self == PutLocationResponse.self {
+            request.httpMethod = "PUT"        }
+        else {
+            request.httpMethod = "POST" }
+        request.addValue("application/json", forHTTPHeaderField: "Accept")//changess
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         let body = body
         do {

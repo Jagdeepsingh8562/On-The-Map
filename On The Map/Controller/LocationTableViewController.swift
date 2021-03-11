@@ -17,13 +17,11 @@ class LocationTableViewController: UITableViewController{
         UdacityAPI.getStudentLocation(completion: handleStudentResponse(success:error:))
     }
     
-    func apicall() {
-        UdacityAPI.getStudentLocation(completion: handleStudentResponse(success:error:))
-    }
+    
     func handleStudentResponse(success: Bool, error: Error?) {
-        if success {
+         if success {
             student.removeAll()
-            student.append(contentsOf: UdacityAPI.Auth.students)
+            self.student.append(contentsOf: UdacityAPI.Auth.students)
             tableView.reloadData()
             
         }else {
@@ -50,9 +48,14 @@ class LocationTableViewController: UITableViewController{
             }
         }
     }
+    func apicall() {
+             UdacityAPI.getStudentLocation(completion: handleStudentResponse(success:error:))
+        tableView.reloadData()
+         }
     
     @IBAction func refreshTable(_ sender: Any) {
         apicall()
+        
     }
     
     
@@ -62,13 +65,16 @@ class LocationTableViewController: UITableViewController{
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath)
-        cell.textLabel?.text = student[indexPath.row].firstName + student[indexPath.row].lastName
+        cell.textLabel?.text = student[indexPath.row].firstName + "" +  student[indexPath.row].lastName
         cell.imageView?.image = UIImage(named: "icon_pin")
+        if(student[indexPath.row].firstName.lowercased().contains("Sellyyyyyyyyyy")) {
+            print("loat", student[indexPath.row].latitude)
+            print("long", student[indexPath.row].longitude)
+        }
         return cell
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         openLink(student[indexPath.row].mediaURL)
-       // UIApplication.shared.open(URL(string: student[indexPath.row].mediaURL)!, options: [:], completionHandler: nil)
     }
     @IBAction func addLocation(_ sender: Any) {
         performSegue(withIdentifier: "addStudentLocation", sender: nil)

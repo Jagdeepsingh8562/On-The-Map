@@ -83,13 +83,13 @@ class VerifyLocationViewController: UIViewController ,MKMapViewDelegate {
     func handlePostLocation(success: Bool, error: Error?) {
         if success {
             guard let locationRequest = locationRequest else { return }
+            UdacityAPI.putStudentLocation(uniqueKey: locationRequest.uniqueKey, firstName: locationRequest.firstName, lastName: locationRequest.lastName, mapString: searchLocation, mediaURL: addedLink, latitude: coordinates.latitude, longitude: coordinates.longitude, completion: handlePutLocationResponse(success:error:))
             createdAt = UdacityAPI.Auth.createdAt
             objectId = UdacityAPI.Auth.objectId
             updateAt = UdacityAPI.Auth.updatedAt
             let student = Student(firstName: locationRequest.firstName, lastName: locationRequest.lastName, longitude: locationRequest.longitude, latitude: locationRequest.longitude, mapString: searchLocation, mediaURL: addedLink, uniqueKey: locationRequest.uniqueKey, objectID: objectId, createdAt: createdAt, updatedAt: updateAt)
             
            UdacityAPI.Auth.students.append(student)
-                print("post location success" + "\(student)")
             self.dismiss(animated: true, completion: nil)
         }else {
             guard let error = error else {
