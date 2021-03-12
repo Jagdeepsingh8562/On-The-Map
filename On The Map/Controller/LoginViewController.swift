@@ -40,29 +40,20 @@ class LoginViewController: UIViewController {
                 return
             }
             print(error)
-            self.showAlert(message: "Please enter vaild email and password", title: "Login Error")
+            self.showAlert(message: error.localizedDescription, title: "Login Error")
         }
         
     }
     
     func setLoggingIn(_ loggingIn: Bool) {
-        if loggingIn {
             DispatchQueue.main.async {
-                self.activityView.startAnimating()
-                
-            }
-        } else {
-            DispatchQueue.main.async {
-                self.activityView.stopAnimating()
-                
-            }
-        }
-        DispatchQueue.main.async {
+                loggingIn ? self.activityView.startAnimating() : self.activityView.stopAnimating()
+              
             self.emailTextField.isEnabled = !loggingIn
             self.passwordTextField.isEnabled = !loggingIn
             self.loginButton.isEnabled = !loggingIn
             self.signUpButton.isEnabled = !loggingIn
-        }
+            }
     }
     
     

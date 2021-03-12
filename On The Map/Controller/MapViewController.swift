@@ -16,15 +16,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var annotations = [MKPointAnnotation]()
     override func viewDidLoad() {
         super.viewDidLoad()
-         //let locations: [Student] = UdacityAPI.Auth.student
         activityView.hidesWhenStopped = true
         UdacityAPI.getStudentLocation(completion: handleStudentResponse(success:error:))
     }
     
     func handleStudentResponse(success: Bool, error: Error?) {
         if success {
-            locations.append(contentsOf: UdacityAPI.Auth.students)
+            locations.removeAll()
+            locations = UdacityAPI.Auth.students
             print("map loaded")
+            mapView.removeAnnotations(annotations)
+            self.annotations.removeAll()
             for dictionary in locations {
                 
                 let lat = CLLocationDegrees(dictionary.latitude)
@@ -71,7 +73,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         UdacityAPI.logoutRequest { (success, error) in
             if success {
                 print("logout")
-               // self.navigationController?.popViewController(animated: true)
                 self.dismiss(animated: true, completion: nil)
             } else {
                 guard let error = error else {
@@ -84,8 +85,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     @IBAction func refresh(_ sender: Any) {
         self.activityView.startAnimating()
-        mapView.removeAnnotations(annotations)
-        self.annotations.removeAll()
+        
         UdacityAPI.getStudentLocation(completion: handleStudentResponse(success:error:))
         
     }

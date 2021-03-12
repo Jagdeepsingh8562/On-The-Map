@@ -54,7 +54,7 @@ class UdacityAPI {
             do {
             let responseObject =  try JSONDecoder().decode(StudentResponse.self, from: data)
                 DispatchQueue.main.async {
-                Auth.students.append(contentsOf: responseObject.results)
+                Auth.students = responseObject.results
                 completion(true,nil)
             }
             }catch {

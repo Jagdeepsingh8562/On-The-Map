@@ -15,7 +15,7 @@
                 <navigationController id="SBN-42-4aG" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" image="icon_mapview-deselected" id="zMb-m5-c76"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="W5H-74-521">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -31,7 +31,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="MapView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3xf-pi-ceC" customClass="LocationTableViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="fO3-VB-mEh">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -65,7 +65,7 @@
                     <navigationItem key="navigationItem" title="On The Map" id="wGr-Km-SXt">
                         <barButtonItem key="leftBarButtonItem" style="plain" id="Hio-SW-OgF">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="sNg-UJ-gUh">
-                                <rect key="frame" x="20" y="13" width="62" height="30"/>
+                                <rect key="frame" x="20" y="7" width="62" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="LOGOUT"/>
                                 <connections>
@@ -76,7 +76,7 @@
                         <rightBarButtonItems>
                             <barButtonItem image="icon_addpin" style="plain" id="ThV-dF-NDV">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="hhz-R5-PbP">
-                                    <rect key="frame" x="370" y="16" width="24" height="24"/>
+                                    <rect key="frame" x="370" y="10" width="24" height="24"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="icon_addpin"/>
                                     <connections>
@@ -86,7 +86,7 @@
                             </barButtonItem>
                             <barButtonItem image="icon_refresh" style="plain" id="bzJ-KQ-JK6">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fvO-Ah-PLZ">
-                                    <rect key="frame" x="338" y="16" width="24" height="24"/>
+                                    <rect key="frame" x="338" y="10" width="24" height="24"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="icon_refresh"/>
                                     <connections>
@@ -97,7 +97,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
-                        <segue destination="bdO-jd-ZSm" kind="presentation" identifier="addStudentLocation" id="dxp-zH-EO4"/>
+                        <segue destination="bdO-jd-ZSm" kind="presentation" identifier="addStudentLocation" modalPresentationStyle="fullScreen" id="dxp-zH-EO4"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gSs-m1-Z7T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -110,7 +110,7 @@
                 <navigationController id="jiM-Kp-nW8" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="List" image="icon_listview-deselected" id="tWI-ub-TTK"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="rTA-jo-esE">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -126,17 +126,17 @@
             <objects>
                 <viewController id="JPZ-Ws-skV" customClass="MapViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X2Z-4q-FYR">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ZcI-sc-Zkf">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <connections>
                                     <outlet property="delegate" destination="JPZ-Ws-skV" id="Y5M-zM-h0x"/>
                                 </connections>
                             </mapView>
                             <activityIndicatorView opaque="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="5zf-MO-JKY">
-                                <rect key="frame" x="188.66666666666666" y="339.66666666666669" width="37" height="37"/>
+                                <rect key="frame" x="188.66666666666666" y="349.66666666666669" width="37" height="37"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MIo-sU-LnL"/>
@@ -153,7 +153,7 @@
                     <navigationItem key="navigationItem" title="On The Map" id="J08-EK-BOA">
                         <barButtonItem key="leftBarButtonItem" title="LOGOUT" style="plain" id="xIB-u9-Kxf">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="f8d-H9-I5N">
-                                <rect key="frame" x="20" y="13" width="92" height="30"/>
+                                <rect key="frame" x="20" y="7" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="LOGOUT"/>
                                 <connections>
@@ -164,7 +164,7 @@
                         <rightBarButtonItems>
                             <barButtonItem image="icon_pin" style="plain" id="hAN-j5-avi">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mqJ-Fw-lxI">
-                                    <rect key="frame" x="323" y="16" width="71" height="24"/>
+                                    <rect key="frame" x="323" y="10" width="71" height="24"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="icon_addpin"/>
                                     <connections>
@@ -174,7 +174,7 @@
                             </barButtonItem>
                             <barButtonItem style="plain" id="f8z-4G-nnj">
                                 <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Uw0-2i-o2q">
-                                    <rect key="frame" x="291" y="16" width="24" height="24"/>
+                                    <rect key="frame" x="291" y="10" width="24" height="24"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" image="icon_refresh"/>
                                     <connections>
@@ -187,7 +187,7 @@
                     <connections>
                         <outlet property="activityView" destination="5zf-MO-JKY" id="144-5Q-EFw"/>
                         <outlet property="mapView" destination="ZcI-sc-Zkf" id="zJE-K9-dX8"/>
-                        <segue destination="bdO-jd-ZSm" kind="presentation" identifier="addStudentLocation" id="3bM-Jb-Tcm"/>
+                        <segue destination="bdO-jd-ZSm" kind="presentation" identifier="addStudentLocation" modalPresentationStyle="fullScreen" id="3bM-Jb-Tcm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9wP-Of-wmi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -199,16 +199,16 @@
             <objects>
                 <viewController storyboardIdentifier="AddLocationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JFM-7Z-Cux" customClass="AddLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qkJ-Hb-zxa">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Location Here" textAlignment="center" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7k4-sv-lws">
-                                <rect key="frame" x="58" y="260" width="316" height="34"/>
+                                <rect key="frame" x="58" y="248" width="316" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBY-g2-dQE">
-                                <rect key="frame" x="98" y="392" width="218" height="39"/>
+                                <rect key="frame" x="98" y="380" width="218" height="39"/>
                                 <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="Find on the Map">
@@ -219,7 +219,7 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_world" translatesAutoresizingMaskIntoConstraints="NO" id="Ao4-WE-Ao2">
-                                <rect key="frame" x="143" y="91" width="128" height="135"/>
+                                <rect key="frame" x="143" y="79" width="128" height="135"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="135" id="5y1-Ut-E8v"/>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="128" id="cXY-9n-1l8"/>
@@ -227,12 +227,12 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter Your Link Here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kyr-87-wSF">
-                                <rect key="frame" x="58" y="314" width="316" height="34"/>
+                                <rect key="frame" x="58" y="302" width="316" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="W6a-mB-5wk">
-                                <rect key="frame" x="197" y="439" width="20" height="20"/>
+                                <rect key="frame" x="197" y="427" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="XtI-AA-0Mm"/>
                                 </constraints>
@@ -260,7 +260,7 @@
                     <navigationItem key="navigationItem" title="Add Location" id="5Ju-sP-3fw">
                         <barButtonItem key="rightBarButtonItem" style="plain" id="WcJ-9C-v3r">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="DTw-eC-Y2V">
-                                <rect key="frame" x="346" y="13" width="48" height="30"/>
+                                <rect key="frame" x="346" y="7" width="48" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Cancel"/>
                                 <connections>
@@ -287,7 +287,7 @@
                 <navigationController id="bdO-jd-ZSm" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="oTK-Zy-xcw"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="j9o-e2-BBQ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -303,17 +303,17 @@
             <objects>
                 <viewController storyboardIdentifier="VerifyLocationViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="GfM-8b-VSO" customClass="VerifyLocationViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZfD-Sa-DkG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="716"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rpV-Pd-eeY">
-                                <rect key="frame" x="0.0" y="56" width="414" height="660"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="692"/>
                                 <connections>
                                     <outlet property="delegate" destination="GfM-8b-VSO" id="AHq-gT-S7B"/>
                                 </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wHy-ET-yNU">
-                                <rect key="frame" x="0.0" y="660" width="414" height="36"/>
+                                <rect key="frame" x="0.0" y="680" width="414" height="36"/>
                                 <color key="backgroundColor" name="GradientBottom"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="FINISH">
@@ -324,7 +324,7 @@
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="mhK-3y-bGR">
-                                <rect key="frame" x="197" y="348" width="20" height="20"/>
+                                <rect key="frame" x="197" y="358" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Ve9-ie-4zM"/>
@@ -535,7 +535,7 @@
                         <outlet property="loginButton" destination="uNk-p2-1PM" id="AOl-D2-iaX"/>
                         <outlet property="passwordTextField" destination="r69-9u-J87" id="ibc-bI-oBA"/>
                         <outlet property="signUpButton" destination="H1r-V0-Yyy" id="JkL-eD-wEu"/>
-                        <segue destination="vSR-LZ-i92" kind="show" identifier="completeLogin" id="Sjb-Hn-jbu"/>
+                        <segue destination="vSR-LZ-i92" kind="presentation" identifier="completeLogin" modalPresentationStyle="fullScreen" id="Sjb-Hn-jbu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WUS-GY-PvV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -544,7 +544,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="3bM-Jb-Tcm"/>
+        <segue reference="dxp-zH-EO4"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="icon_addpin" width="24" height="24"/>

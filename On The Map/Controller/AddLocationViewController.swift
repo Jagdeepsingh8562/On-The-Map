@@ -31,10 +31,6 @@ class AddLocationViewController: UIViewController , UITextFieldDelegate{
         addLinkTextField.delegate = self
         
     }
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(animated)
-    }
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == addLocationTextField {
             locationString = textField.text ?? ""
@@ -74,10 +70,10 @@ class AddLocationViewController: UIViewController , UITextFieldDelegate{
         
         guard let url = URL(string: self.addLinkTextField.text!), UIApplication.shared.canOpenURL(url) else {
             self.showAlert(message: "Please insert 'https://' in your link.", title: "Invalid URL")
+            setLoading(false)
             return
         }
         geocoding(locationString)
-         //   self.performSegue(withIdentifier: "verifySegue", sender: nil)
     }
 //
     
