@@ -37,7 +37,7 @@ The app contains 4 View Controllers:
 
 ## Screenshots
 
-<img src = "Screenshots/screenshot_1.png" width = "180"> &nbsp; &nbsp; <img src = "Screenshots/screenshot_2.png" width = "180"> &nbsp; &nbsp; <img src = "Screenshots/screenshot_3.png" width = "180"> &nbsp; &nbsp; <img src = "Screenshots/screenshot_4.png" width = "180"> &nbsp; &nbsp; <img src = "Screenshots/screenshot_5.png" width = "180">
+<img src = "Screenshots/screenshot_1.png" width = "180"> &nbsp; &nbsp; <img src = "Screenshots/screenshot_2.png" width = "180"> &nbsp; &nbsp; <img src = "Screenshots/screenshot_3.png" width = "180"> &nbsp; &nbsp; <br> <img src = "Screenshots/screenshot_4.png" width = "180"> &nbsp; &nbsp; <img src = "Screenshots/screenshot_5.png" width = "180">
 
 ## License
 This code is free and open source and I have build this project for my Udacity submission.
